@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">ChefBurgerApp</string>
+    <string name="baceptar">Aceptar</string>
+    <string name="registro">REGISTRARME</string>
+    <string name="bcancelar">Cancelar</string>
+    <string name="miperfil">Mi Perfil</string>
+    <string name="Menu">MENÚ</string>
+    <string name="portada">MADE WITH LOVE</string>
+    <string name="Hamburguesa">Hamburguesas</string>
+    <string name="Papas">Papas</string>
+    <string name="Brownie">Postres</string>
+    <string name="Ubicacion">Ubicación</string>
+    <string name="Name">USUARIO:</string>
+    <string name="Pass">CONTRASEÑA:</string>
+    <string name="Nom">Nombre:</string>
+    <string name="Correo">Email:</string>
+    <string name="RPass">CONTRASEÑA:</string>
+    <string name="Email">EMAIL:</string>
+    <string name="menu">Menú</string>
+    <string name="principal">Principal</string>
+    <string name="Poblado">POBLADO</string>
+    <string name="envigado">ENVIGADO</string>
+    <string name="laureles">LAURELES</string>
+    <string name="mayorca">MAYORCA</string>
+    <string name="molinos">MOLINOS</string>
+    <string name="tesoro">TESORO</string>
+    <string name="abierto">Open navigation drawer</string>
+    <string name="cerrado">Close navigation drawer</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings fragments -->
+    <string name="penscam" >Precio:$9.900</string>
+    <string name="enscam" formatted="false">Lecghuga crespa y romana,tomates marinados,dados deaguacate,queso parmesanoy papas chips</string>
+    <string name="psalad">Precio:$16.900</string>
+    <string name="salad" formatted="false">Lechuga con carne a la parrilla,tomates marinados,cebolla,queso parmesano,puerrochampiñones,papas chips</string>
+    <string name="pharg">Precio:$18.900</string>
+    <string name="harg" formatted="false">Pan ajonjoli,carne 50% res 50% chorizo argentino,queso mozarrella y cebolla.%1$d</string>
+    <string name="phavo">Precio:$18.900</string>
+    <string name="havo" formatted="false">Pan ajonjoli, 150gr de res a la parrilla,tomate,cebolla, queso cheddar,tocineta y aguacate</string>
+    <string name="phcyb">Precio:$16.900</string>
+    <string name="hcyb" formatted="false">Pan ajonjoli,150gr de res a la parrilla,lechuga,tomate,cebolla,queso cheddar y tocineta</string>
+    <string name="phveg">Precio:$17.900</string>
+    <string name="hveg" formatted="false">Pan campesino,champiñon portobello a la parrilla,cebolla,tomate y queso mozarrella</string>
+    <string name="phita">Precio:$16.900</string>
+    <string name="hita" formatted="false">Pan ajonjoli,lechuga,cebolla,tomate y quezo mozarrella</string>
+    <string name="phc">Precio:$14.900</string>
+    <string name="hc" formatted="false">Pan ajonjoli,150gr de res a la parrilla,lechuga,tomate,cebolla</string>
+    <string name="phtx">Precio:$19.900</string>
+    <string name="htx" formatted="false">Pan campesino,150gr de res a la parrilla,lechuga y tomate</string>
+    <string name="phph">Precio:$19.900</string>
+    <string name="hph" formatted="false">Pan campesino,150gr de res a la parrilla,lechuga y cebolla</string>
+    <string name="pgh">Precio:$7.900</string>
+    <string name="gh" formatted="false">Galleta al horno con helado</string>
+    <string name="pbh">Precio:$6.900</string>
+    <string name="bh" formatted="false">Brownie al horno con helado</string>
+    <string name="pmj">Precio:$8.900</string>
+    <string name="mj" formatted="false">Milonga de flor de jamaica</string>
+    <string name="ppa">Precio:$8.900</string>
+    <string name="pa"> Queso cheddar</string>
+    <string name="ppr">Precio:$4.200</string>
+    <string name="pr"> Papas rusticas</string>
+    <string name="ppf">Precio:$4.200</string>
+    <string name="pf"> Papas francesas</string>
+    <string name="ppc">Precio:$3.900</string>
+    <string name="pc"> Papas chips</string>
+
+    <string-array name="lista">
+        <item>Argentina+Francesas</item>
+        <item>Italiana+Galleta</item>
+        <item>Veggie+Rusticas</item>
+        <item>Campestre+Chips</item>
+        <item>Americanas+Brownie</item>
+    </string-array>
+
+</resources>
