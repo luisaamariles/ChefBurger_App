@@ -29,16 +29,16 @@ public class MenuActivity extends NavActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_activity);
-        Nomb = (TextView) findViewById(R.id.Nom);
-        cont = (TextView) findViewById(R.id.Correo);
+        //setContentView(R.layout.menu_activity);
+       // Nomb = (TextView) findViewById(R.id.Nom);
+        //cont = (TextView) findViewById(R.id.Correo);
         //Bundle extras = getIntent().getExtras();
        /* Nombre = extras.getString("Name");
         Contrasena = extras.getString("Pass");
         Mail=extras.getString("Email");*/
         //Toast.makeText(this, "user: "+Nombre+" contrasena: "+Contrasena+"email"+Mail, Toast.LENGTH_SHORT).show();
-        DrawerLayout contentFrameLayout = (DrawerLayout) findViewById(R.id.contenedorPrincipal);
-        getLayoutInflater().inflate(R.layout.nav, contentFrameLayout);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
+        getLayoutInflater().inflate(R.layout.menu_activity, contentFrameLayout);
 
 
 

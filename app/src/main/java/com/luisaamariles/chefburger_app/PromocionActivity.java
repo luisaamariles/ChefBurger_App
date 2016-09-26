@@ -38,14 +38,16 @@ public class PromocionActivity extends NavActivity {
             };
     ListView listView;
     FrameLayout contentFrameLayout;
+    String Name, fecha;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.promocion);
+        //setContentView(R.layout.promocion);
 
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
-        getLayoutInflater().inflate(R.layout.nav, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.promocion, contentFrameLayout);
 
         //ArrayAdapter<String> adaptador =new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,opciones);
 
@@ -71,7 +73,11 @@ public class PromocionActivity extends NavActivity {
 //                Toast.makeText(PromocionActivity.this, i , Toast.LENGTH_LONG).show();
                 switch(i){
                     case 0:
+                        Name= "Argentina+Francesa";
+                        fecha = "1 semana";
                         Intent intent = new Intent(PromocionActivity.this, PromfinActivity.class);
+                        intent.putExtra("Name", Name.toString());
+                        intent.putExtra("fecha", fecha.toString());
                         startActivity(intent);
                         Toast.makeText(PromocionActivity.this, "1", Toast.LENGTH_LONG).show();
                         break;
