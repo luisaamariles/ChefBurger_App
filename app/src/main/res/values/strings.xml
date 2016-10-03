@@ -26,6 +26,7 @@
     <string name="tesoro">TESORO</string>
     <string name="abierto">Open navigation drawer</string>
     <string name="cerrado">Close navigation drawer</string>
+    <string name="volver">Volver</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -33,7 +34,7 @@
 
     <!-- Strings fragments -->
     <string name="penscam" >Precio:$9.900</string>
-    <string name="enscam" formatted="false">Lecghuga crespa y romana,tomates marinados,dados deaguacate,queso parmesanoy papas chips</string>
+    <string name="enscam" formatted="false">Lechuga crespa y romana,tomates marinados,dados deaguacate,queso parmesanoy papas chips</string>
     <string name="psalad">Precio:$16.900</string>
     <string name="salad" formatted="false">Lechuga con carne a la parrilla,tomates marinados,cebolla,queso parmesano,puerrochampiñones,papas chips</string>
     <string name="pharg">Precio:$18.900</string>

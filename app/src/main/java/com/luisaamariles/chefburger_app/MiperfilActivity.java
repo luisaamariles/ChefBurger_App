@@ -9,20 +9,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by Luisa Maria Amariles on 04/09/2016.
  */
-public class MiperfilActivity extends AppCompatActivity {
+public class MiperfilActivity extends NavActivity {
     String Nombre,Contrasena, Mail;
     TextView Nomb,cont;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.miperfil);
-        getSupportActionBar().show();
+        //setContentView(R.layout.miperfil);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
+        getLayoutInflater().inflate(R.layout.miperfil, contentFrameLayout);
+
         Nomb = (TextView) findViewById(R.id.Nom);
         cont = (TextView) findViewById(R.id.Correo);
         Bundle extras = getIntent().getExtras();

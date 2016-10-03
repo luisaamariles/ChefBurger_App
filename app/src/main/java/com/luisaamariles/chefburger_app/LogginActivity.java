@@ -37,7 +37,7 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().hide();
         Bundle extras = getIntent().getExtras();
 
-        //String name= extras.getString("Name");
+       // String name= extras.getString("Name");
         //String pass = extras.getString("Pass");
 
         //Toast.makeText(this, "user: "+name+" contrasena: "+pass,Toast.LENGTH_SHORT).show();
@@ -54,11 +54,12 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
             //datos.setText("Campos vacios");
         }else{
             if(vacio1.equals(Nombre)&& vacio2.equals(Contrasena)) {
-                Intent intent = new Intent(this, MainActivity.class);
-                /*intent.putExtra("Name",Name.getText().toString());
+                Intent intent = new Intent(this, NavActivity.class);
+                intent.putExtra("Name",Name.getText().toString());
                 intent.putExtra("Pass",Pass.getText().toString());
-                intent.putExtra("Email",Mail.toString());*/
+                intent.putExtra("Email",Mail.toString());
                 startActivity(intent);
+                finish();
 
             }else{
                 Toast.makeText(this,"Registrese!",Toast.LENGTH_SHORT).show();

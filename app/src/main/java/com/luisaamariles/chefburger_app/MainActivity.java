@@ -12,5 +12,9 @@ public class MainActivity extends NavActivity{
 
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
+        Bundle extras = getIntent().getExtras();
+        Nombre = extras.getString("Name");
+        Contrasena = extras.getString("Pass");
+        Mail=extras.getString("Email");
     }
 }

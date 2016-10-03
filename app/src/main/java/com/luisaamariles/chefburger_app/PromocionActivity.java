@@ -49,7 +49,12 @@ public class PromocionActivity extends NavActivity {
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
         getLayoutInflater().inflate(R.layout.promocion, contentFrameLayout);
 
-        //ArrayAdapter<String> adaptador =new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,opciones);
+        Bundle extras = getIntent().getExtras();
+        Nombre = extras.getString("Name");
+        Contrasena = extras.getString("Pass");
+        Mail=extras.getString("Email");
+
+        //ArrayAdapter<String> adaptador =new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,getResources().getStringArray(R.array.nom));
 
         Adapter adaptador = new Adapter(this);
         listView = (ListView) findViewById(R.id.menu);
@@ -73,32 +78,68 @@ public class PromocionActivity extends NavActivity {
 //                Toast.makeText(PromocionActivity.this, i , Toast.LENGTH_LONG).show();
                 switch(i){
                     case 0:
-                        Name= "Argentina+Francesa";
+                        Name= "Argentina+Francesas";
                         fecha = "1 semana";
                         Intent intent = new Intent(PromocionActivity.this, PromfinActivity.class);
-                        intent.putExtra("Name", Name.toString());
+                        intent.putExtra("Name1", Name.toString());
                         intent.putExtra("fecha", fecha.toString());
+                        intent.putExtra("Name",Nombre.toString());
+                        intent.putExtra("Pass",Contrasena.toString());
+                        intent.putExtra("Email",Mail.toString());
                         startActivity(intent);
+                        finish();
                         Toast.makeText(PromocionActivity.this, "1", Toast.LENGTH_LONG).show();
                         break;
                     case 1:
+                        Name= "Italiana+Galleta";
+                        fecha = "2 semana";
                         Intent intent2 = new Intent(PromocionActivity.this, PromfinActivity.class);
+                        intent2.putExtra("Name1", Name.toString());
+                        intent2.putExtra("fecha", fecha.toString());
+                        intent2.putExtra("Name",Nombre.toString());
+                        intent2.putExtra("Pass",Contrasena.toString());
+                        intent2.putExtra("Email",Mail.toString());
                         startActivity(intent2);
+                        finish();
                         Toast.makeText(PromocionActivity.this, "2", Toast.LENGTH_LONG).show();
                         break;
                     case 2:
+                        Name= "Veggie+Rusticas";
+                        fecha = "1 semana";
                         Intent intent3 = new Intent(PromocionActivity.this, PromfinActivity.class);
+                        intent3.putExtra("Name1", Name.toString());
+                        intent3.putExtra("fecha", fecha.toString());
+                        intent3.putExtra("Name",Nombre.toString());
+                        intent3.putExtra("Pass",Contrasena.toString());
+                        intent3.putExtra("Email",Mail.toString());
                         startActivity(intent3);
+                        finish();
                         Toast.makeText(PromocionActivity.this, "3", Toast.LENGTH_LONG).show();
                         break;
                     case 3:
+                        Name= "Campestre+Chips";
+                        fecha = "1 semana";
                         Intent intent4 = new Intent(PromocionActivity.this, PromfinActivity.class);
+                        intent4.putExtra("Name1", Name.toString());
+                        intent4.putExtra("fecha", fecha.toString());
+                        intent4.putExtra("Name",Nombre.toString());
+                        intent4.putExtra("Pass",Contrasena.toString());
+                        intent4.putExtra("Email",Mail.toString());
                         startActivity(intent4);
+                        finish();
                         Toast.makeText(PromocionActivity.this, "4", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
+                        Name= "Americanas+Brownie";
+                        fecha = "2 semana";
                         Intent intent5 = new Intent(PromocionActivity.this, PromfinActivity.class);
+                        intent5.putExtra("Name1", Name.toString());
+                        intent5.putExtra("fecha", fecha.toString());
+                        intent5.putExtra("Name",Nombre.toString());
+                        intent5.putExtra("Pass",Contrasena.toString());
+                        intent5.putExtra("Email",Mail.toString());
                         startActivity(intent5);
+                        finish();
                         Toast.makeText(PromocionActivity.this, "5", Toast.LENGTH_LONG).show();
                         break;
                 }

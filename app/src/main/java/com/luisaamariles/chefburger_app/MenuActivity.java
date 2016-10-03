@@ -32,10 +32,10 @@ public class MenuActivity extends NavActivity {
         //setContentView(R.layout.menu_activity);
        // Nomb = (TextView) findViewById(R.id.Nom);
         //cont = (TextView) findViewById(R.id.Correo);
-        //Bundle extras = getIntent().getExtras();
-       /* Nombre = extras.getString("Name");
+        Bundle extras = getIntent().getExtras();
+        Nombre = extras.getString("Name");
         Contrasena = extras.getString("Pass");
-        Mail=extras.getString("Email");*/
+        Mail=extras.getString("Email");
         //Toast.makeText(this, "user: "+Nombre+" contrasena: "+Contrasena+"email"+Mail, Toast.LENGTH_SHORT).show();
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
         getLayoutInflater().inflate(R.layout.menu_activity, contentFrameLayout);
