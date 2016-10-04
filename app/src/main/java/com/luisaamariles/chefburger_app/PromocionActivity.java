@@ -88,7 +88,7 @@ public class PromocionActivity extends NavActivity {
                         intent.putExtra("Email",Mail.toString());
                         startActivity(intent);
                         finish();
-                        Toast.makeText(PromocionActivity.this, "1", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PromocionActivity.this, "1", Toast.LENGTH_LONG).show();
                         break;
                     case 1:
                         Name= "Italiana+Galleta";
@@ -101,7 +101,7 @@ public class PromocionActivity extends NavActivity {
                         intent2.putExtra("Email",Mail.toString());
                         startActivity(intent2);
                         finish();
-                        Toast.makeText(PromocionActivity.this, "2", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PromocionActivity.this, "2", Toast.LENGTH_LONG).show();
                         break;
                     case 2:
                         Name= "Veggie+Rusticas";
@@ -114,7 +114,7 @@ public class PromocionActivity extends NavActivity {
                         intent3.putExtra("Email",Mail.toString());
                         startActivity(intent3);
                         finish();
-                        Toast.makeText(PromocionActivity.this, "3", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PromocionActivity.this, "3", Toast.LENGTH_LONG).show();
                         break;
                     case 3:
                         Name= "Campestre+Chips";
@@ -127,7 +127,7 @@ public class PromocionActivity extends NavActivity {
                         intent4.putExtra("Email",Mail.toString());
                         startActivity(intent4);
                         finish();
-                        Toast.makeText(PromocionActivity.this, "4", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PromocionActivity.this, "4", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
                         Name= "Americanas+Brownie";
@@ -140,7 +140,7 @@ public class PromocionActivity extends NavActivity {
                         intent5.putExtra("Email",Mail.toString());
                         startActivity(intent5);
                         finish();
-                        Toast.makeText(PromocionActivity.this, "5", Toast.LENGTH_LONG).show();
+                       //Toast.makeText(PromocionActivity.this, "5", Toast.LENGTH_LONG).show();
                         break;
                 }
             }

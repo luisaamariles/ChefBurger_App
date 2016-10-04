@@ -4,7 +4,9 @@ package com.luisaamariles.chefburger_app;
  * Created by Luisa Maria Amariles on 25/09/2016.
  */
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +22,8 @@ import android.widget.Toast;
  * Created by Luisa Maria Amariles on 03/09/2016.
  */
 public class LogginActivity extends AppCompatActivity implements View.OnClickListener {
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
     EditText Name,Pass;
     Button bAceptar;
     TextView datos;
@@ -28,6 +32,11 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login);
+
+        prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        editor=prefs.edit();
+
+
         Name = (EditText) findViewById(R.id.eName);
         Pass= (EditText) findViewById(R.id.ePass);
         datos = (TextView) findViewById(R.id.datos);
@@ -42,22 +51,42 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
 
         //Toast.makeText(this, "user: "+name+" contrasena: "+pass,Toast.LENGTH_SHORT).show();
 //String...los que llegan string user=extras.getstring();
+        if(prefs.getInt("var",-1)==1){
+            Intent intent = new Intent(this, NavActivity.class);
+            intent.putExtra("Name",prefs.getString("nombre",""));
+            intent.putExtra("Pass",prefs.getString("contraseña",""));
+            intent.putExtra("Email",prefs.getString("mail",""));
+
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void onClick(View v){
         //Iniciando la actividad Visor
 
         String vacio1= Name.getText().toString();
+        String a,b;
         String vacio2= Pass.getText().toString();
+
+
         if (vacio1.equals("") || vacio2.equals("")) {
             Toast.makeText(this,"Campos Vacios",Toast.LENGTH_SHORT).show();
             //datos.setText("Campos vacios");
-        }else{
-            if(vacio1.equals(Nombre)&& vacio2.equals(Contrasena)) {
+        }else{a=prefs.getString("nombre","");
+            b=prefs.getString("contraseña","");
+            //Toast.makeText(this,a,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,b,Toast.LENGTH_SHORT).show();
+            if(vacio1.equals(a)&& vacio2.equals(b)) {
                 Intent intent = new Intent(this, NavActivity.class);
-                intent.putExtra("Name",Name.getText().toString());
-                intent.putExtra("Pass",Pass.getText().toString());
-                intent.putExtra("Email",Mail.toString());
+               // vacio1=prefs.getString("nombre","");
+                //vacio2=prefs.getString("mail","");
+                intent.putExtra("Name",prefs.getString("nombre",""));
+                intent.putExtra("Pass",prefs.getString("contraseña",""));
+                intent.putExtra("Email",prefs.getString("mail",""));
+                editor.putInt("var",1);
+                editor.commit();
                 startActivity(intent);
                 finish();
 
@@ -95,6 +124,13 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
             Nombre = data.getExtras().getString("Name");
             Contrasena = data.getExtras().getString("Pass");
             Mail=data.getExtras().getString("Email");
+            editor.putString("nombre",Nombre);
+            editor.putString("contraseña",Contrasena);
+            editor.putString("mail",Mail);
+            editor.commit();
+
+
+
             //Toast.makeText(this, "user: "+Nombre+" contrasena: "+Contrasena+"email"+Mail, Toast.LENGTH_SHORT).show();
 
         }

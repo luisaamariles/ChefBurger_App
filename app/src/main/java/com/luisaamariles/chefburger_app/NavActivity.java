@@ -3,7 +3,9 @@ package com.luisaamariles.chefburger_app;
 /**
  * Created by Luisa Maria Amariles on 25/09/2016.
  */
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -27,10 +29,16 @@ public class NavActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     String Nombre,Contrasena, Mail;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav);
         Bundle extras = getIntent().getExtras();
+
+        prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        editor=prefs.edit();
 
         Nombre = extras.getString("Name");
         Contrasena = extras.getString("Pass");
@@ -84,10 +92,15 @@ public class NavActivity extends AppCompatActivity {
                         startActivity(intent3);
                         finish();
                         break;
-                    case (4):
+                    case (4):editor.putInt("var",-1);
+                        editor.commit();
+                        Intent intent4 = new Intent(NavActivity.this, LogginActivity.class);
+
+                        startActivity(intent4);
+                        finish();
                         break;
                 }
-                if (i == 4) {
+                if (i == 5) {
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.contenedorFrame, fragment).commit();
 
