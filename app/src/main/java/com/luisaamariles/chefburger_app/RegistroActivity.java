@@ -3,7 +3,10 @@ package com.luisaamariles.chefburger_app;
 /**
  * Created by Luisa Maria Amariles on 25/09/2016.
  */
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,13 +23,19 @@ import android.widget.Toast;
 public class RegistroActivity  extends AppCompatActivity implements View.OnClickListener {
     EditText eName,ePass,eRPass,Email;
     TextView datos;
-    String Pass,RPass;
+    String Pass,RPass,Nombre, Contrasena,Mail;
     Button bAceptar;
+    ContentValues dataBD;
+    SQLiteDatabase dbUsuarios;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.registro);
+
+        UsuariosSQLiteHelper usuarios = new UsuariosSQLiteHelper(this,"UsuariosBD",null,1);
+        dbUsuarios = usuarios.getWritableDatabase();
+
         eName = (EditText) findViewById(R.id.eName);
         ePass = (EditText) findViewById(R.id.ePass);
         eRPass = (EditText) findViewById(R.id.eRPass);
@@ -39,6 +48,7 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
         getSupportActionBar().hide();
         //Bundle extras = getIntent().getExtras();
 
+
     }
 
     public void onClick(View v) {
@@ -50,26 +60,52 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
                 String vacio3= eRPass.getText().toString();
                 String vacio4= Email.getText().toString();
 
+                Cursor c = dbUsuarios.rawQuery("select * from usuarios where usuario='"+vacio1+"'",null);
+
+                if(c.moveToFirst()){
+                    Nombre = c.getString(1);
+                    Contrasena = c.getString(2);
+                    Mail = c.getString(3);
+                }else{
+                    Nombre = "NULL";
+                    Contrasena = "NULL";
+                    Mail = "NULL";
+                }
+
                 if (vacio1.equals("") || vacio2.equals("") || vacio3.equals("") || vacio4.equals("")) {
                     Toast.makeText(this,"Campos vacios",Toast.LENGTH_SHORT).show();
                     //datos.setText("Campos vacios");
-                }else{
-                    Pass= ePass.getText().toString();
-                    RPass= eRPass.getText().toString();
+                }else {
+                    if (Nombre.equals(vacio1)) {
+                        Toast.makeText(this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
+                        eName.setText("");
+                    } else {
+                        Pass = ePass.getText().toString();
+                        RPass = eRPass.getText().toString();
 
-                    if(Pass.toString().equals(RPass)) {
-                        Intent intent = new Intent();
-                        intent.putExtra("Name", eName.getText().toString());
-                        intent.putExtra("Pass", ePass.getText().toString());
-                        intent.putExtra("Email", Email.getText().toString());
-                        //intent.putExtra("Email",Email.getText().toString());
-                        setResult(RESULT_OK, intent);
-                        finish();
-                    }else{
-                        Toast.makeText(this,"Las contraseñas no coinciden!",Toast.LENGTH_SHORT).show();
-                        // datos.setText("Las contraseñas no coinciden!");
-                        ePass.setText("");
-                        eRPass.setText("");
+                        if (Pass.toString().equals(RPass)) {
+
+                            dataBD = new ContentValues();
+                            dataBD.put("usuario", vacio1);
+                            dataBD.put("contraseña", vacio2);
+                            dataBD.put("correo", vacio4);
+
+                            dbUsuarios.insert("Usuarios", null, dataBD);
+
+
+                            Intent intent = new Intent();
+                            //intent.putExtra("Name", eName.getText().toString());
+                            //intent.putExtra("Pass", ePass.getText().toString());
+                            //intent.putExtra("Email", Email.getText().toString());
+                            //intent.putExtra("Email",Email.getText().toString());
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Las contraseñas no coinciden!", Toast.LENGTH_SHORT).show();
+                            // datos.setText("Las contraseñas no coinciden!");
+                            ePass.setText("");
+                            eRPass.setText("");
+                        }
                     }
                 }
                 break;

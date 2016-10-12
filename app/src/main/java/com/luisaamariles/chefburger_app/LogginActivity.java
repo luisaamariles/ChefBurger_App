@@ -4,9 +4,12 @@ package com.luisaamariles.chefburger_app;
  * Created by Luisa Maria Amariles on 25/09/2016.
  */
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,10 +31,16 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
     Button bAceptar;
     TextView datos;
     String Nombre,Contrasena, Mail;
+    ContentValues dataBD;
+    SQLiteDatabase dbUsuarios;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login);
+
+        UsuariosSQLiteHelper usuarios = new UsuariosSQLiteHelper(this,"UsuariosBD",null,1);
+        dbUsuarios = usuarios.getWritableDatabase();
 
         prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         editor=prefs.edit();
@@ -69,6 +78,22 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
         String vacio1= Name.getText().toString();
         String a,b;
         String vacio2= Pass.getText().toString();
+        Cursor c = dbUsuarios.rawQuery("select * from usuarios where usuario='"+vacio1+"'",null);
+
+        if(c.moveToFirst()){
+            Nombre = c.getString(1);
+            Contrasena = c.getString(2);
+            Mail = c.getString(3);
+        }
+
+
+
+        editor.putString("nombre",Nombre);
+        editor.putString("contraseña",Contrasena);
+        editor.putString("mail",Mail);
+        editor.commit();
+
+        Toast.makeText(this,Contrasena,Toast.LENGTH_SHORT).show();
 
 
         if (vacio1.equals("") || vacio2.equals("")) {
@@ -121,13 +146,13 @@ public class LogginActivity extends AppCompatActivity implements View.OnClickLis
             // Log.d("Nombre", name);
             // Log.d("contraseña", pass);
 
-            Nombre = data.getExtras().getString("Name");
-            Contrasena = data.getExtras().getString("Pass");
-            Mail=data.getExtras().getString("Email");
-            editor.putString("nombre",Nombre);
-            editor.putString("contraseña",Contrasena);
-            editor.putString("mail",Mail);
-            editor.commit();
+            //Nombre = data.getExtras().getString("Name");
+            //Contrasena = data.getExtras().getString("Pass");
+           // Mail=data.getExtras().getString("Email");
+            //editor.putString("nombre",Nombre);
+            //editor.putString("contraseña",Contrasena);
+            //editor.putString("mail",Mail);
+           // editor.commit();
 
 
 
