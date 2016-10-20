@@ -26,6 +26,7 @@
         <activity android:name=".MenuActivity"/>
         <activity android:name=".PromocionActivity"/>
         <activity android:name=".PromfinActivity"/>
+        <activity android:name=".EliminarActivity"/>
     </application>
 
 </manifest>

@@ -35,14 +35,13 @@ public class NavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav);
-        Bundle extras = getIntent().getExtras();
 
         prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         editor=prefs.edit();
 
-        Nombre = extras.getString("Name");
-        Contrasena = extras.getString("Pass");
-        Mail=extras.getString("Email");
+        Nombre=prefs.getString("nombre","");
+        Contrasena = prefs.getString("contraseña","");
+        Mail= prefs.getString("mail","");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -62,40 +61,27 @@ public class NavActivity extends AppCompatActivity {
                 switch (i) {
                     case (0):
                         Intent intentp = new Intent(NavActivity.this, MiperfilActivity.class);
-                        intentp.putExtra("Name",Nombre.toString());
-                        intentp.putExtra("Pass",Contrasena.toString());
-                        intentp.putExtra("Email",Mail.toString());
                         startActivity(intentp);
                         finish();
                         break;
                     case (1):
                         Intent intent = new Intent(NavActivity.this, MenuActivity.class);
-                        intent.putExtra("Name",Nombre.toString());
-                        intent.putExtra("Pass",Contrasena.toString());
-                        intent.putExtra("Email",Mail.toString());
                         startActivity(intent);
                         finish();
                         break;
                     case (2):
                         Intent intent2 = new Intent(NavActivity.this, MainActivity.class);
-                        intent2.putExtra("Name",Nombre.toString());
-                        intent2.putExtra("Pass",Contrasena.toString());
-                        intent2.putExtra("Email",Mail.toString());
                         startActivity(intent2);
                         finish();
                         break;
                     case (3):
                         Intent intent3 = new Intent(NavActivity.this, PromocionActivity.class);
-                        intent3.putExtra("Name",Nombre.toString());
-                        intent3.putExtra("Pass",Contrasena.toString());
-                        intent3.putExtra("Email",Mail.toString());
                         startActivity(intent3);
                         finish();
                         break;
                     case (4):editor.putInt("var",-1);
                         editor.commit();
                         Intent intent4 = new Intent(NavActivity.this, LogginActivity.class);
-
                         startActivity(intent4);
                         finish();
                         break;

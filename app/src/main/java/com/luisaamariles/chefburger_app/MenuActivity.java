@@ -3,7 +3,9 @@ package com.luisaamariles.chefburger_app;
 /**
  * Created by Luisa Maria Amariles on 25/09/2016.
  */
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,25 +24,22 @@ import android.widget.TextView;
  */
 public class MenuActivity extends NavActivity {
     String Nombre,Contrasena, Mail;
-    TextView Nomb,cont;
     private ViewPager mViewPager;
-    private String[] opciones = new String[]{"Mi perfil", "Menú", "Principal", "Cerrar sesión"};
-
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.menu_activity);
-       // Nomb = (TextView) findViewById(R.id.Nom);
-        //cont = (TextView) findViewById(R.id.Correo);
-        Bundle extras = getIntent().getExtras();
-        Nombre = extras.getString("Name");
-        Contrasena = extras.getString("Pass");
-        Mail=extras.getString("Email");
-        //Toast.makeText(this, "user: "+Nombre+" contrasena: "+Contrasena+"email"+Mail, Toast.LENGTH_SHORT).show();
+
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
         getLayoutInflater().inflate(R.layout.menu_activity, contentFrameLayout);
 
+        prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        editor=prefs.edit();
 
+        Nombre=prefs.getString("nombre","");
+        Contrasena = prefs.getString("contraseña","");
+        Mail= prefs.getString("mail","");
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);

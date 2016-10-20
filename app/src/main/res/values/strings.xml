@@ -27,7 +27,8 @@
     <string name="abierto">Open navigation drawer</string>
     <string name="cerrado">Close navigation drawer</string>
     <string name="volver">Volver</string>
-
+    <string name="agregar">Agregar a favoritos</string>
+    <string name="eliminar">Eliminar de favoritos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -38,7 +39,7 @@
     <string name="psalad">Precio:$16.900</string>
     <string name="salad" formatted="false">Lechuga con carne a la parrilla,tomates marinados,cebolla,queso parmesano,puerrochampiñones,papas chips</string>
     <string name="pharg">Precio:$18.900</string>
-    <string name="harg" formatted="false">Pan ajonjoli,carne 50% res 50% chorizo argentino,queso mozarrella y cebolla.%1$d</string>
+    <string name="harg" formatted="false">Pan ajonjoli,carne 50% res 50% chorizo argentino,queso mozarrella y cebolla.</string>
     <string name="phavo">Precio:$18.900</string>
     <string name="havo" formatted="false">Pan ajonjoli, 150gr de res a la parrilla,tomate,cebolla, queso cheddar,tocineta y aguacate</string>
     <string name="phcyb">Precio:$16.900</string>

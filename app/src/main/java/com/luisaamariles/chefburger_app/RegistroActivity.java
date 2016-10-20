@@ -46,9 +46,6 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
         bAceptar.setOnClickListener(this);
         Cancelar.setOnClickListener(this);
         getSupportActionBar().hide();
-        //Bundle extras = getIntent().getExtras();
-
-
     }
 
     public void onClick(View v) {
@@ -74,7 +71,6 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
 
                 if (vacio1.equals("") || vacio2.equals("") || vacio3.equals("") || vacio4.equals("")) {
                     Toast.makeText(this,"Campos vacios",Toast.LENGTH_SHORT).show();
-                    //datos.setText("Campos vacios");
                 }else {
                     if (Nombre.equals(vacio1)) {
                         Toast.makeText(this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
@@ -92,17 +88,11 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
 
                             dbUsuarios.insert("Usuarios", null, dataBD);
 
-
                             Intent intent = new Intent();
-                            //intent.putExtra("Name", eName.getText().toString());
-                            //intent.putExtra("Pass", ePass.getText().toString());
-                            //intent.putExtra("Email", Email.getText().toString());
-                            //intent.putExtra("Email",Email.getText().toString());
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
                             Toast.makeText(this, "Las contraseñas no coinciden!", Toast.LENGTH_SHORT).show();
-                            // datos.setText("Las contraseñas no coinciden!");
                             ePass.setText("");
                             eRPass.setText("");
                         }
@@ -110,8 +100,6 @@ public class RegistroActivity  extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.bCancelar:
-                //DO something
-
                 Intent intent = new Intent();
                 setResult(RESULT_CANCELED,intent);
                 finish();

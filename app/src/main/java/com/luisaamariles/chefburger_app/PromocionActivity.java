@@ -1,14 +1,14 @@
 package com.luisaamariles.chefburger_app;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,35 +25,80 @@ import java.util.ArrayList;
 
 public class PromocionActivity extends NavActivity {
 
-    //final String[] opciones = new String[]{"Argentina+Francesas", "Italiana+Galleta", "Veggie+Rusticas","Campestre+Chips", "Americanas+Brownie"};
-
-    private List[] datos=
-            new List[]{
-                    new List("Argentina+Francesas","1 semana"),
-                    new List("Italiana+Galleta","2 semanas"),
-                    new List("Veggie+Rusticas","1 semana"),
-                    new List("Campestre+Chips","1 semana"),
-                    new List("Americanas+Brownie","2 semanas"),
-            };
+    private List[] datos;
     ListView listView;
-    FrameLayout contentFrameLayout;
     String Name, fecha;
-
-
+    SQLiteDatabase dbProductos;
+    ContentValues dataBD;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+    ArrayList<String> list,list2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.promocion);
 
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.contenedorFrame);
         getLayoutInflater().inflate(R.layout.promocion, contentFrameLayout);
 
-        Bundle extras = getIntent().getExtras();
-        Nombre = extras.getString("Name");
-        Contrasena = extras.getString("Pass");
-        Mail=extras.getString("Email");
+        ProductosSQLiteHelper productos= new ProductosSQLiteHelper(this,"ProductosBD",null,1);
+        dbProductos = productos.getWritableDatabase();
 
-        //ArrayAdapter<String> adaptador =new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,getResources().getStringArray(R.array.nom));
+        prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        editor=prefs.edit();
+
+        Nombre=prefs.getString("nombre","");
+        Contrasena = prefs.getString("contraseña","");
+        Mail= prefs.getString("mail","");
+
+        Cursor c1 = dbProductos.rawQuery("select * from productos",null);
+        if(c1.moveToFirst()){
+
+        }else{
+            dataBD = new ContentValues();
+            dataBD.put("producto", "Argentina+Francesas");
+            dataBD.put("tiempo", "1 semana");
+            dataBD.put("descripcion", "Hamburguesa argentina + papas francesas por $21.900");
+            dbProductos.insert("Productos", null, dataBD);
+            dataBD = new ContentValues();
+            dataBD.put("producto", "Italiana+Galleta");
+            dataBD.put("tiempo", "2 semana");
+            dataBD.put("descripcion", "Hamburguesa Italiana + galleta al horno con helado por $22.800");
+            dbProductos.insert("Productos", null, dataBD);
+            dataBD = new ContentValues();
+            dataBD.put("producto", "Veggie+Rusticas");
+            dataBD.put("tiempo", "1 semana");
+            dataBD.put("descripcion", "Hamburguesa vegetariana + papas rusticas por $21.100");
+            dbProductos.insert("Productos", null, dataBD);
+            dataBD = new ContentValues();
+            dataBD.put("producto", "Campestre+Chips");
+            dataBD.put("tiempo", "1 semana");
+            dataBD.put("descripcion", "Ensalada campestre + papas chips por $11.800");
+            dbProductos.insert("Productos", null, dataBD);
+            dataBD = new ContentValues();
+            dataBD.put("producto", "Americanas+Brownie");
+            dataBD.put("tiempo", "2 semana");
+            dataBD.put("descripcion", "Papas americanas + brownie al horno por $13.800");
+            dbProductos.insert("Productos", null, dataBD);
+        }
+        list = new ArrayList<String>();
+        list2=new ArrayList<String>();
+
+        Cursor c = dbProductos.rawQuery("select * from productos",null);
+
+        if(c.moveToFirst()){
+            do {
+                    list.add(c.getString(1));
+                    list2.add(c.getString(2));
+            } while (c.moveToNext());
+        }
+
+        datos= new List[]{
+                new List(list.get(0), list2.get(0)),
+                new List(list.get(1), list2.get(1)),
+                new List(list.get(2), list2.get(2)),
+                new List(list.get(3), list2.get(3)),
+                new List(list.get(4), list2.get(4)),
+        };
 
         Adapter adaptador = new Adapter(this);
         listView = (ListView) findViewById(R.id.menu);
@@ -62,10 +106,9 @@ public class PromocionActivity extends NavActivity {
         listView.setAdapter(adaptador);
 
         registrarEventos();
-
     }
 
-    private void registrarEventos(){
+   private void registrarEventos(){
 
         /// selecciona la lista en pantalla segun su ID
         ListView lista1 = (ListView) findViewById(R.id.menu);
@@ -75,72 +118,51 @@ public class PromocionActivity extends NavActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//                Toast.makeText(PromocionActivity.this, i , Toast.LENGTH_LONG).show();
                 switch(i){
                     case 0:
-                        Name= "Argentina+Francesas";
-                        fecha = "1 semana";
+                        Name= list.get(0);
+                        fecha = list2.get(0);
                         Intent intent = new Intent(PromocionActivity.this, PromfinActivity.class);
                         intent.putExtra("Name1", Name.toString());
                         intent.putExtra("fecha", fecha.toString());
-                        intent.putExtra("Name",Nombre.toString());
-                        intent.putExtra("Pass",Contrasena.toString());
-                        intent.putExtra("Email",Mail.toString());
                         startActivity(intent);
                         finish();
-                        //Toast.makeText(PromocionActivity.this, "1", Toast.LENGTH_LONG).show();
                         break;
                     case 1:
-                        Name= "Italiana+Galleta";
-                        fecha = "2 semana";
+                        Name= list.get(1);
+                        fecha = list2.get(1);
                         Intent intent2 = new Intent(PromocionActivity.this, PromfinActivity.class);
                         intent2.putExtra("Name1", Name.toString());
                         intent2.putExtra("fecha", fecha.toString());
-                        intent2.putExtra("Name",Nombre.toString());
-                        intent2.putExtra("Pass",Contrasena.toString());
-                        intent2.putExtra("Email",Mail.toString());
                         startActivity(intent2);
                         finish();
-                        //Toast.makeText(PromocionActivity.this, "2", Toast.LENGTH_LONG).show();
                         break;
                     case 2:
-                        Name= "Veggie+Rusticas";
-                        fecha = "1 semana";
+                        Name= list.get(2);
+                        fecha = list.get(2);
                         Intent intent3 = new Intent(PromocionActivity.this, PromfinActivity.class);
                         intent3.putExtra("Name1", Name.toString());
                         intent3.putExtra("fecha", fecha.toString());
-                        intent3.putExtra("Name",Nombre.toString());
-                        intent3.putExtra("Pass",Contrasena.toString());
-                        intent3.putExtra("Email",Mail.toString());
                         startActivity(intent3);
                         finish();
-                        //Toast.makeText(PromocionActivity.this, "3", Toast.LENGTH_LONG).show();
                         break;
                     case 3:
-                        Name= "Campestre+Chips";
-                        fecha = "1 semana";
+                        Name= list.get(3);
+                        fecha = list2.get(3);
                         Intent intent4 = new Intent(PromocionActivity.this, PromfinActivity.class);
                         intent4.putExtra("Name1", Name.toString());
                         intent4.putExtra("fecha", fecha.toString());
-                        intent4.putExtra("Name",Nombre.toString());
-                        intent4.putExtra("Pass",Contrasena.toString());
-                        intent4.putExtra("Email",Mail.toString());
                         startActivity(intent4);
                         finish();
-                        //Toast.makeText(PromocionActivity.this, "4", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
-                        Name= "Americanas+Brownie";
-                        fecha = "2 semana";
+                        Name= list.get(4);
+                        fecha = list2.get(4);
                         Intent intent5 = new Intent(PromocionActivity.this, PromfinActivity.class);
                         intent5.putExtra("Name1", Name.toString());
                         intent5.putExtra("fecha", fecha.toString());
-                        intent5.putExtra("Name",Nombre.toString());
-                        intent5.putExtra("Pass",Contrasena.toString());
-                        intent5.putExtra("Email",Mail.toString());
                         startActivity(intent5);
                         finish();
-                       //Toast.makeText(PromocionActivity.this, "5", Toast.LENGTH_LONG).show();
                         break;
                 }
             }
